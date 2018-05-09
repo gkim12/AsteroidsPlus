@@ -7,9 +7,9 @@ public class Bullet extends Actor{
 	private boolean didHit = false;
 	
 	public Bullet() {
-		setImage(new Image("images/fireBall.png"));
-		xVelocity = 5;
-		yVelocity = 5;
+		setImage(new Image("images/bullet.png"));
+		xVelocity = 200;
+		yVelocity = -200;
 	}
 	
 	@Override
@@ -19,9 +19,11 @@ public class Bullet extends Actor{
 		}
 		if (getOneIntersectingObject(Asteroid.class) != null && !didHit) {
 			didHit = true;
+			getWorld().remove(this);
 			Asteroid asteroid = getOneIntersectingObject(Asteroid.class);
 			asteroid.setStage(asteroid.getStage() + 1);
 		}
+		move(xVelocity, yVelocity);
 	}
 
 	public double getxVelocity() {
