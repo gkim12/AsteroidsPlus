@@ -33,47 +33,46 @@ public class Game extends Application {
 		stage.setTitle("Demo");
 		stage.setResizable(false);
 		// Group root = new Group();
-		World ballWorld = new BallWorld();
-		//ballWorld.
-		Ball ball = new Ball();
-		ball.setY(90);
-		ballWorld.add(ball);
-		double bricksX = 0;
-		for (int i = 0; i < 10; i++) {
-			Brick brickn = new Brick();
-			brickn.setY(20);
-			brickn.setX(bricksX);
-			bricksX += brickn.getWidth();
-			ballWorld.add(brickn);
-		}
+		World rocketWorld = new RocketWorld();
+		Rocket rocket = new Rocket();
+		rocket.setX(300);
+		rocket.setY(300);
+		rocket.setRotate(0);
+		rocketWorld.add(rocket);
+		
+		rocket.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
-		Paddle paddle = new Paddle();
-		ballWorld.add(paddle);
-		paddle.setY(600);
-		paddle.setX(500);
-		ballWorld.setOnMouseMoved(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				// TODO Auto-generated method stub
+				System.out.println(rocket.getWorld().getKeyCodes());
+			}
+			
+		});
+		
+		rocketWorld.setOnMouseMoved(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
-				if(arg0.getX() > 0 && arg0.getX() < ballWorld.getWidth())paddle.setX(arg0.getX() - 0.5 * paddle.getWidth());
+				//if(arg0.getX() > 0 && arg0.getX() < ballWorld.getWidth())paddle.setX(arg0.getX() - 0.5 * paddle.getWidth());
 			}
 
 		});
-		ballWorld.setOnKeyPressed(new EventHandler<KeyEvent>() {
+		rocketWorld.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
 			@Override
 			public void handle(KeyEvent event) {
-				ballWorld.addKey(event.getCode());
-
+				rocketWorld.addKey(event.getCode());
+				System.out.println(event.getText());
 			}
 
 		});
-		ballWorld.setOnKeyReleased(new EventHandler<KeyEvent>() {
+		rocketWorld.setOnKeyReleased(new EventHandler<KeyEvent>() {
 
 			@Override
 			public void handle(KeyEvent event) {
 
-				ballWorld.removeKey(event.getCode());
+				rocketWorld.removeKey(event.getCode());
 
 			}
 
@@ -87,14 +86,14 @@ public class Game extends Application {
 		borderPane.setLeft(leftRectangle);
 		borderPane.setRight(rightRectangle);
 
-		borderPane.setCenter(ballWorld);
+		borderPane.setCenter(rocketWorld);
 		Scene scene = new Scene(borderPane, 1080, 720);
 		stage.setScene(scene);
-		ballWorld.start();
+		rocketWorld.start();
 
 		stage.show();
 
-		ballWorld.requestFocus();
+		rocketWorld.requestFocus();
 	}
 
 }

@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 
 public abstract class World extends Pane {
 	private AnimationTimer timer;
-	private HashSet<KeyCode> keyCodes;
+	private ArrayList<KeyCode> keyCodes;
 
 	public World() {
 		timer = new AnimationTimer() {
@@ -21,7 +21,7 @@ public abstract class World extends Pane {
 
 			}
 		};
-		keyCodes = new HashSet<KeyCode>();
+		keyCodes = new ArrayList<KeyCode>();
 		// start(); *We only call start in application (Game.java)*
 	}
 
@@ -54,14 +54,18 @@ public abstract class World extends Pane {
 	public abstract void act(long now);
 
 	public void addKey(KeyCode c) {
-		keyCodes.add(c);
+		if(!keyCodes.contains(c)) keyCodes.add(c);
 	}
 
 	public boolean removeKey(KeyCode c) {
+		System.out.println("released " + c.getName());
 		return keyCodes.remove(c);
 	}
 
 	public boolean isKeyDown(KeyCode c) {
 		return keyCodes.contains(c);
+	}
+	public ArrayList<KeyCode> getKeyCodes(){
+		return keyCodes;
 	}
 }
