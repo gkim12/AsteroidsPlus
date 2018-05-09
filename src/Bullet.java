@@ -20,7 +20,7 @@ public class Bullet extends Actor{
 		if (getOneIntersectingObject(Asteroid.class) != null && !didHit) {
 			didHit = true;
 			Asteroid asteroid = getOneIntersectingObject(Asteroid.class);
-			
+			asteroid.setStage(asteroid.getStage() + 1);
 		}
 	}
 
