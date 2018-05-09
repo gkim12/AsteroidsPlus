@@ -19,11 +19,11 @@ public class Rocket extends Actor{
 		setX(getX() + 0.2);
 		//System.out.println(getWorld().getKeyCodes().size());
 		//System.out.println(getWorld().getClass().toString());
-		if(getWorld().isKeyDown(KeyCode.LEFT)) {
+		if(getWorld().isKeyDown(KeyCode.LEFT) || getWorld().isKeyDown(KeyCode.A)) {
 			//System.out.println("you pressed LEFT");
 			setRotate(getRotate() - 3.6);
 		}
-		if(getWorld().isKeyDown(KeyCode.RIGHT)) {
+		if(getWorld().isKeyDown(KeyCode.RIGHT) || getWorld().isKeyDown(KeyCode.D)) {
 			//System.out.println("you pressed RIGHT");
 			setRotate(getRotate() + 3.6);
 		}

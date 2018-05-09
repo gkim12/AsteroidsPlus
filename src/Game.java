@@ -45,7 +45,7 @@ public class Game extends Application {
 			@Override
 			public void handle(MouseEvent event) {
 				// TODO Auto-generated method stub
-				System.out.println(rocket.getWorld().getKeyCodes());
+//				System.out.println(rocket.getWorld().getKeyCodes());
 			}
 			
 		});
@@ -63,7 +63,7 @@ public class Game extends Application {
 			@Override
 			public void handle(KeyEvent event) {
 				rocketWorld.addKey(event.getCode());
-				System.out.println(event.getText());
+//				System.out.println(event.getText());
 			}
 
 		});

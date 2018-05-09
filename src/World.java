@@ -58,7 +58,7 @@ public abstract class World extends Pane {
 	}
 
 	public boolean removeKey(KeyCode c) {
-		System.out.println("released " + c.getName());
+//		System.out.println("released " + c.getName());
 		return keyCodes.remove(c);
 	}
 
