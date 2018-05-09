@@ -39,6 +39,7 @@ public class Game extends Application {
 		rocket.setY(300);
 		rocket.setRotate(0);
 		rocketWorld.add(rocket);
+		rocketWorld.add(new Bullet());
 		
 		rocket.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
