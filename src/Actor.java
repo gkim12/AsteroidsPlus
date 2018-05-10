@@ -42,4 +42,8 @@ public abstract class Actor extends ImageView{
 		if(listIntersecting.size() > 0) return listIntersecting.get(0);
 		else return null;
 	}
+	
+	public boolean hasIntersectingObjects() {
+		return getIntersectingObjects(Actor.class).size() > 0;
+	}
 }

@@ -39,7 +39,10 @@ public class Game extends Application {
 		rocket.setY(300);
 		rocket.setRotate(0);
 		rocketWorld.add(rocket);
-		rocketWorld.add(new Bullet());
+		MediumAsteroid ma = new MediumAsteroid();
+		ma.setX(900);
+		ma.setY(400);
+		rocketWorld.add(ma);
 		
 		rocket.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
@@ -88,6 +91,7 @@ public class Game extends Application {
 		borderPane.setRight(rightRectangle);
 
 		borderPane.setCenter(rocketWorld);
+		
 		Scene scene = new Scene(borderPane, 1080, 720);
 		stage.setScene(scene);
 		rocketWorld.start();

@@ -14,14 +14,12 @@ public class Bullet extends Actor{
 	
 	@Override
 	public void act(long now) {
-		if(getOneIntersectingObject(Asteroid.class) == null){
-			didHit = false;
-		}
-		if (getOneIntersectingObject(Asteroid.class) != null && !didHit) {
-			didHit = true;
+		
+		if (hasIntersectingObjects() && getIntersectingObjects(Asteroid.class).size() > 0) {
+			Asteroid asteroid = getIntersectingObjects(Asteroid.class).get(0);
+			asteroid.setStage(asteroid.getStage() - 1);
+			System.out.println(asteroid.getStage());
 			getWorld().remove(this);
-			Asteroid asteroid = getOneIntersectingObject(Asteroid.class);
-			asteroid.setStage(asteroid.getStage() + 1);
 		}
 		move(xVelocity, yVelocity);
 	}

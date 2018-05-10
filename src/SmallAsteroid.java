@@ -14,4 +14,10 @@ public class SmallAsteroid extends Asteroid{
 		}
 	}
 
+	@Override
+	public void updateImage() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

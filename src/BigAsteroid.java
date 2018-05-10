@@ -20,4 +20,10 @@ public class BigAsteroid extends Asteroid{
 		}
 	}
 
+	@Override
+	public void updateImage() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
