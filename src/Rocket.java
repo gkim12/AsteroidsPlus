@@ -19,32 +19,28 @@ public class Rocket extends Actor{
 	@Override
 	public void act(long now) {
 		isActing = true;
-		//setX(getX() + 0.2); - ROCKET IS NOT MOVING!!
-		//System.out.println(getWorld().getKeyCodes().size());
-		//System.out.println(getWorld().getClass().toString());
+		//setX(getX() + 0.2); - CHANGE THIS IF YOU WNAT YOUR ROCKET TO MOVE
 		if(getWorld().isKeyDown(KeyCode.LEFT) || getWorld().isKeyDown(KeyCode.A)) {
-			//System.out.println("you pressed LEFT");
-			setRotate(getRotate() - .36); //3.6
+			setRotate(getRotate() - 2.4); // THIS CONTROLS THE ANGLE
 		}
 		if(getWorld().isKeyDown(KeyCode.RIGHT) || getWorld().isKeyDown(KeyCode.D)) {
-			//System.out.println("you pressed RIGHT");
-			setRotate(getRotate() + .36); //3.6
+			setRotate(getRotate() + 2.4); // THIS CONTROLS THE ANGLE
 		}
 		if(getWorld().isKeyDown(KeyCode.SPACE)) fireBullet(getRotate(), now);
 	}
 	
 	public void fireBullet(double angle, double currentTime) {
-		if(currentTime < nextShot) return;
+		if(currentTime < nextShot) return; //makes you unable to fire too frequently
 		Bullet bullet = new Bullet();
 		bullet.setRotate(angle);
 		bullet.setX(this.getX());
 		bullet.setY(this.getY());
+		//we need to fix it so that bullets are fired exactly from the center of the rocket
 		double angleInRads = Math.toRadians(angle);
 		bullet.setxVelocity(BULLET_SPEED*Math.cos(angleInRads));
 		bullet.setyVelocity(BULLET_SPEED*Math.sin(angleInRads));
 		getWorld().add(bullet);
-		nextShot = (long) (currentTime + FIRE_DELAY);
-		//getWorld().add();
+		nextShot = (long) (currentTime + FIRE_DELAY); //update the next time you can fire
 	}
 
 }

@@ -6,16 +6,7 @@ public class MediumAsteroid extends Asteroid{
 
 	public MediumAsteroid() {
 		
-		setOnMouseEntered(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				System.out.println(getWorld().getObjects(Asteroid.class));
-			}
-			
-		});
-		
+		super();
 		setStage(5);
 		setImage(new Image("images/fireBall.png"));
 		setxVelocity(0);
@@ -24,12 +15,7 @@ public class MediumAsteroid extends Asteroid{
 	
 	@Override
 	public void act(long now) {
-//		if(getStage() == 3) {
-//			//setImage(new Image("images/MediumAsteroid1"));
-//		}
-//		if(getStage() > 6) {
-//			getWorld().remove(this);
-//		}
+
 	}
 
 	@Override

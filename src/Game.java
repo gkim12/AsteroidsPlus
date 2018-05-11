@@ -39,10 +39,16 @@ public class Game extends Application {
 		rocket.setY(300);
 		rocket.setRotate(0);
 		rocketWorld.add(rocket);
+		//add a medium asteroid
 		MediumAsteroid ma = new MediumAsteroid();
 		ma.setX(900);
 		ma.setY(400);
 		rocketWorld.add(ma);
+		//add a small asteroid
+		SmallAsteroid sa = new SmallAsteroid();
+		sa.setX(700);
+		sa.setY(200);
+		rocketWorld.add(sa);
 		
 		rocket.setOnMouseEntered(new EventHandler<MouseEvent>() {
 

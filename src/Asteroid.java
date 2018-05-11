@@ -7,6 +7,18 @@ public abstract class Asteroid extends Actor{
 	private double xVelocity;
 	private double yVelocity;
 	
+	public Asteroid() {
+		setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				System.out.println(getClassName() + ":" + getStage());
+			}
+			
+		});
+	}
+	
 	
 	public int getStage() {
 		return stage;
@@ -33,5 +45,9 @@ public abstract class Asteroid extends Actor{
 
 	public void setyVelocity(double yVelocity) {
 		this.yVelocity = yVelocity;
+	}
+	
+	public String getClassName() {
+		return this.getClass().getName();
 	}
 }

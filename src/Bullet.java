@@ -18,7 +18,7 @@ public class Bullet extends Actor{
 		if (hasIntersectingObjects() && getIntersectingObjects(Asteroid.class).size() > 0) {
 			Asteroid asteroid = getIntersectingObjects(Asteroid.class).get(0);
 			asteroid.setStage(asteroid.getStage() - 1);
-			System.out.println(asteroid.getStage());
+			System.out.println(asteroid.getClassName() + ":" + asteroid.getStage());
 			getWorld().remove(this);
 		}
 		move(xVelocity, yVelocity);
