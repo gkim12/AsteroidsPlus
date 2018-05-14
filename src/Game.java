@@ -12,15 +12,21 @@
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class Game extends Application {
+	private boolean paused = false;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -103,6 +109,10 @@ public class Game extends Application {
 		rocketWorld.start();
 
 		stage.show();
+		
+		BorderPane pausedPane = new BorderPane();
+		Scene pausedScene = new Scene(pausedPane, 1080, 720);
+		
 
 		rocketWorld.requestFocus();
 	}

@@ -17,11 +17,11 @@ public abstract class Actor extends ImageView{
 	} 
 	
 	public double getHeight(){
-		return super.getBoundsInParent().getHeight();
+		return super.getBoundsInLocal().getHeight();
 	}
 	
 	public double getWidth(){
-		return super.getBoundsInParent().getWidth();
+		return super.getBoundsInLocal().getWidth();
 	}
 	
 	public <A extends Actor> java.util.List<A> getIntersectingObjects(java.lang.Class<A> cls){
