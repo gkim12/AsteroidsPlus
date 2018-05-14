@@ -2,16 +2,17 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 
-public class Rocket extends Actor{
-	
+public class Rocket extends Actor {
+
 	private double xSpeed;
 	private double ySpeed;
 	private boolean isActing;
 	public final double BULLET_SPEED = 45;
 	public final double ROCKET_ACCEL = .05;
-	public final long FIRE_DELAY = 200000000;//200 milliseconds -> 5 bullets/second
+	public final double ROCKET_MAX_SPEED = 3;
+	public final long FIRE_DELAY = 200000000;// 200 milliseconds -> 5
+												// bullets/second
 	public long nextShot = 0;
-	
 
 	public Rocket() {
 		setImage(new Image("images/rocket.png"));
@@ -19,38 +20,45 @@ public class Rocket extends Actor{
 		xSpeed = 0;
 		ySpeed = 0;
 	}
-	
+
 	@Override
 	public void act(long now) {
 		isActing = true;
 		move(xSpeed, ySpeed);
-		if(getWorld().isKeyDown(KeyCode.UP) || getWorld().isKeyDown(KeyCode.W)) {
-			xSpeed += ROCKET_ACCEL * Math.cos(Math.toRadians(getRotate()));
-			ySpeed += ROCKET_ACCEL * Math.sin(Math.toRadians(getRotate()));
+		if (getWorld().isKeyDown(KeyCode.UP) || getWorld().isKeyDown(KeyCode.W)) {
+			if (Math.sqrt(Math.pow(xSpeed, 2) + Math.pow(ySpeed, 2)) < ROCKET_MAX_SPEED) { //Must adjust this, sets a hard limit w/o consideration to direction rn
+				xSpeed += ROCKET_ACCEL * Math.cos(Math.toRadians(getRotate()));
+				ySpeed += ROCKET_ACCEL * Math.sin(Math.toRadians(getRotate()));
+			}
 		}
-		if(getWorld().isKeyDown(KeyCode.LEFT) || getWorld().isKeyDown(KeyCode.A)) {
+		if (getWorld().isKeyDown(KeyCode.LEFT) || getWorld().isKeyDown(KeyCode.A)) {
 			setRotate(getRotate() - 2.4); // THIS CONTROLS THE ANGLE
 		}
-		if(getWorld().isKeyDown(KeyCode.RIGHT) || getWorld().isKeyDown(KeyCode.D)) {
+		if (getWorld().isKeyDown(KeyCode.RIGHT) || getWorld().isKeyDown(KeyCode.D)) {
 			setRotate(getRotate() + 2.4); // THIS CONTROLS THE ANGLE
 		}
-		if(getWorld().isKeyDown(KeyCode.SPACE)) fireBullet(getRotate(), now);
-		
+		if (getWorld().isKeyDown(KeyCode.SPACE))
+			fireBullet(getRotate(), now);
+
 	}
-	
+
 	public void fireBullet(double angle, double currentTime) {
-		if(currentTime < nextShot) return; //makes you unable to fire too frequently
+		if (currentTime < nextShot)
+			return; // makes you unable to fire too frequently
 		Bullet bullet = new Bullet();
 		bullet.setRotate(angle);
-		Point2D rocketCenter = new Point2D(this.getX() + this.getWidth() / 2 - bullet.getWidth() / 2, this.getY() + this.getHeight() / 2 - bullet.getHeight() / 2);
+		Point2D rocketCenter = new Point2D(this.getX() + this.getWidth() / 2 - bullet.getWidth() / 2,
+				this.getY() + this.getHeight() / 2 - bullet.getHeight() / 2);
 		bullet.setX(rocketCenter.getX());
 		bullet.setY(rocketCenter.getY());
-		//we need to fix it so that bullets are fired exactly from the center of the rocket
+		// we need to fix it so that bullets are fired exactly from the center
+		// of the rocket
 		double angleInRads = Math.toRadians(angle);
-		bullet.setxVelocity(BULLET_SPEED*Math.cos(angleInRads));
-		bullet.setyVelocity(BULLET_SPEED*Math.sin(angleInRads));
+		bullet.setxVelocity(BULLET_SPEED * Math.cos(angleInRads));
+		bullet.setyVelocity(BULLET_SPEED * Math.sin(angleInRads));
 		getWorld().add(bullet);
-		nextShot = (long) (currentTime + FIRE_DELAY); //update the next time you can fire
+		nextShot = (long) (currentTime + FIRE_DELAY); // update the next time
+														// you can fire
 	}
 
 }
