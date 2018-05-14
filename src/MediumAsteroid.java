@@ -10,7 +10,7 @@ public class MediumAsteroid extends Asteroid{
 		setStage(5);
 		setImage(new Image("images/fireBall.png"));
 		setxVelocity(0);
-		setyVelocity(0);
+		setyVelocity(0);  
 	}
 	
 	@Override

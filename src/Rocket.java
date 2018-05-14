@@ -8,6 +8,7 @@ public class Rocket extends Actor{
 	private double ySpeed;
 	private boolean isActing;
 	public final double BULLET_SPEED = 45;
+	public final double ROCKET_ACCEL = .05;
 	public final long FIRE_DELAY = 200000000;//200 milliseconds -> 5 bullets/second
 	public long nextShot = 0;
 	
@@ -15,13 +16,18 @@ public class Rocket extends Actor{
 	public Rocket() {
 		setImage(new Image("images/rocket.png"));
 		isActing = false;
-		
+		xSpeed = 0;
+		ySpeed = 0;
 	}
 	
 	@Override
 	public void act(long now) {
 		isActing = true;
-		//setX(getX() + 0.2); - CHANGE THIS IF YOU WNAT YOUR ROCKET TO MOVE
+		move(xSpeed, ySpeed);
+		if(getWorld().isKeyDown(KeyCode.UP) || getWorld().isKeyDown(KeyCode.W)) {
+			xSpeed += ROCKET_ACCEL * Math.cos(Math.toRadians(getRotate()));
+			ySpeed += ROCKET_ACCEL * Math.sin(Math.toRadians(getRotate()));
+		}
 		if(getWorld().isKeyDown(KeyCode.LEFT) || getWorld().isKeyDown(KeyCode.A)) {
 			setRotate(getRotate() - 2.4); // THIS CONTROLS THE ANGLE
 		}

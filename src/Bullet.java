@@ -4,7 +4,6 @@ public class Bullet extends Actor{
 
 	private double xVelocity;
 	private double yVelocity;
-	private boolean didHit = false;
 	
 	public Bullet() {
 		setImage(new Image("images/bullet.png"));
