@@ -8,8 +8,21 @@ public abstract class Actor extends ImageView{
 	public abstract void act(long now);
 	
 	public void move(double dx, double dy){
-		setX(getX() + dx);
-		setY(getY() + dy);
+		if (getX() > getScene().getWidth()) {
+			setX(-70);
+		} else if (getX() < -70) {
+			setX(getScene().getWidth());
+		} else {
+			setX(getX() + dx);
+		}
+		
+		if (getY() > getScene().getHeight()) {
+			setY(0);
+		} else if (getY() < 0) {
+			setY(getScene().getHeight());
+		} else {
+			setY(getY() + dy);
+		}
 	}
 	
 	public World getWorld(){

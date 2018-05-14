@@ -1,19 +1,28 @@
+import java.math.BigInteger;
+
 import javafx.scene.image.Image;
 
 public class Bullet extends Actor{
 
 	private double xVelocity;
 	private double yVelocity;
+	private int aliveTime;
 	
 	public Bullet() {
 		setImage(new Image("images/bullet.png"));
 		xVelocity = 200;
 		yVelocity = -200;
+		aliveTime = 0;
 	}
 	
 	@Override
 	public void act(long now) {
-		
+		aliveTime++;
+		if (aliveTime == 50) {
+			aliveTime = 0;
+			getWorld().remove(this);
+			return;
+		}
 		if (hasIntersectingObjects() && getIntersectingObjects(Asteroid.class).size() > 0) {
 			Asteroid asteroid = getIntersectingObjects(Asteroid.class).get(0);
 			asteroid.setStage(asteroid.getStage() - 1);
