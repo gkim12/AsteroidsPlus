@@ -97,8 +97,8 @@ public class Game extends Application {
 		BorderPane borderPane = new BorderPane();
 		Rectangle leftRectangle = new Rectangle(70, 720);
 		Rectangle rightRectangle = new Rectangle(70, 720);
-		leftRectangle.setFill(Color.AQUAMARINE);
-		rightRectangle.setFill(Color.AQUAMARINE);
+		leftRectangle.setFill(Color.WHITE);
+		rightRectangle.setFill(Color.WHITE);
 		borderPane.setLeft(leftRectangle);
 		borderPane.setRight(rightRectangle);
 
