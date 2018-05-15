@@ -1,29 +1,25 @@
+import javafx.scene.image.Image;
+
 public class BigAsteroid extends Asteroid{
 
 	public BigAsteroid() {
 		super();
-		//setImage(new Image("images/BigAsteroid0"));
+		setHealth(20);
+		setImage(new Image("images/ball.png"));
 		setxVelocity(25);
 		setyVelocity(25);
 	}
 	
 	@Override
 	public void act(long now) {
-		if(getStage() == 5) {
-			//setImage(new Image("images/BigAsteroid1"));
-		}
-		if(getStage() == 10) {
-			//setImage(new Image("images/BigAsteroid2"));
-		}
-		if(getStage() > 15) {
-			getWorld().remove(this);
-		}
+	
 	}
 
 	@Override
 	public void updateImage() {
-		// TODO Auto-generated method stub
-		
+		//if(getHealth() < 10) setImage(new Image("images/bigAsteroidCracked"));
+		//if(getHealth() < 5) setImage(new Image("images/bigAsteroidVeryCracked"));
+		if(getHealth() <= 0) getWorld().remove(this);
 	}
 
 }

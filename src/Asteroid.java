@@ -3,7 +3,7 @@ import javafx.scene.input.MouseEvent;
 
 public abstract class Asteroid extends Actor{
 
-	private int stage;
+	private int health;
 	private double xVelocity;
 	private double yVelocity;
 	
@@ -13,19 +13,19 @@ public abstract class Asteroid extends Actor{
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				System.out.println(getClassName() + ":" + getStage());
+				System.out.println(getClassName() + ":" + getHealth());
 			}
 			
 		});
 	}
 	
 	
-	public int getStage() {
-		return stage;
+	public int getHealth() {
+		return health;
 	}
 
-	public void setStage(int stage) {
-		this.stage = stage;
+	public void setHealth(int health) {
+		this.health = health;
 		updateImage();
 	}
 

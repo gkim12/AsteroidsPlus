@@ -1,5 +1,3 @@
-import java.math.BigInteger;
-
 import javafx.scene.image.Image;
 
 public class Bullet extends Actor{
@@ -25,8 +23,8 @@ public class Bullet extends Actor{
 		}
 		if (hasIntersectingObjects() && getIntersectingObjects(Asteroid.class).size() > 0) {
 			Asteroid asteroid = getIntersectingObjects(Asteroid.class).get(0);
-			asteroid.setStage(asteroid.getStage() - 1);
-			System.out.println(asteroid.getClassName() + ":" + asteroid.getStage());
+			asteroid.setHealth(asteroid.getHealth() - 1);
+			System.out.println(asteroid.getClassName() + ":" + asteroid.getHealth());
 			getWorld().remove(this);
 			return;
 		}
