@@ -12,17 +12,15 @@
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class Game extends Application {
@@ -55,6 +53,7 @@ public class Game extends Application {
 		sa.setX(700);
 		sa.setY(200);
 		rocketWorld.add(sa);
+		rocketWorld.setBackground(new Background(new BackgroundImage(new Image("images/space.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
 		
 		rocket.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
@@ -94,17 +93,8 @@ public class Game extends Application {
 
 		});
 
-		BorderPane borderPane = new BorderPane();
-		Rectangle leftRectangle = new Rectangle(70, 720);
-		Rectangle rightRectangle = new Rectangle(70, 720);
-		leftRectangle.setFill(Color.WHITE);
-		rightRectangle.setFill(Color.WHITE);
-		borderPane.setLeft(leftRectangle);
-		borderPane.setRight(rightRectangle);
-
-		borderPane.setCenter(rocketWorld);
 		
-		Scene scene = new Scene(borderPane, 1080, 720);
+		Scene scene = new Scene(rocketWorld, 1070, 710);
 		stage.setScene(scene);
 		rocketWorld.start();
 
