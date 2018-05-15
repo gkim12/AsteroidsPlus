@@ -28,6 +28,7 @@ public class Bullet extends Actor{
 			asteroid.setStage(asteroid.getStage() - 1);
 			System.out.println(asteroid.getClassName() + ":" + asteroid.getStage());
 			getWorld().remove(this);
+			return;
 		}
 		move(xVelocity, yVelocity);
 	}
