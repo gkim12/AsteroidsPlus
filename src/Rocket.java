@@ -24,9 +24,11 @@ public class Rocket extends Actor {
 	@Override
 	public void act(long now) {
 		isActing = true;
+
 		move(xSpeed, ySpeed);
 		if (getWorld().isKeyDown(KeyCode.UP) || getWorld().isKeyDown(KeyCode.W)) {
-			if (Math.sqrt(Math.pow(xSpeed, 2) + Math.pow(ySpeed, 2)) < ROCKET_MAX_SPEED) { //Must adjust this, sets a hard limit w/o consideration to direction rn
+			if (Math.sqrt(Math.pow(xSpeed + ROCKET_ACCEL * Math.cos(Math.toRadians(getRotate())), 2)
+					+ Math.pow(ySpeed + ROCKET_ACCEL * Math.sin(Math.toRadians(getRotate())), 2)) <= ROCKET_MAX_SPEED) {
 				xSpeed += ROCKET_ACCEL * Math.cos(Math.toRadians(getRotate()));
 				ySpeed += ROCKET_ACCEL * Math.sin(Math.toRadians(getRotate()));
 			}
@@ -39,7 +41,6 @@ public class Rocket extends Actor {
 		}
 		if (getWorld().isKeyDown(KeyCode.SPACE))
 			fireBullet(getRotate(), now);
-
 	}
 
 	public void fireBullet(double angle, double currentTime) {
