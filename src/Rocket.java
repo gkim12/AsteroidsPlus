@@ -7,7 +7,7 @@ public class Rocket extends Actor {
 	private double xSpeed;
 	private double ySpeed;
 	private boolean isActing;
-	public final double BULLET_SPEED = 45;
+	public final double BULLET_SPEED = 20;
 	public final double ROCKET_ACCEL = .05;
 	public final double ROCKET_MAX_SPEED = 3;
 	public final long FIRE_DELAY = 200000000;// 200 milliseconds -> 5

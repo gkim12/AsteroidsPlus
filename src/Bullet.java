@@ -16,7 +16,7 @@ public class Bullet extends Actor{
 	@Override
 	public void act(long now) {
 		aliveTime++;
-		if (aliveTime == 50) {
+		if (aliveTime == 75) {
 			aliveTime = 0;
 			getWorld().remove(this);
 			return;
