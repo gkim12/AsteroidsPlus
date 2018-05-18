@@ -8,9 +8,9 @@ public class Rocket extends Actor {
 	private double ySpeed;
 	private boolean isActing;
 	public final double BULLET_SPEED = 20;
-	public final double ROCKET_ACCEL = .05;
-	public final double ROCKET_MAX_SPEED = 5;
-	public final long FIRE_DELAY = 200000000;// 200 milliseconds -> 5
+	public double ROCKET_ACCEL = .11;
+	public final double ROCKET_MAX_SPEED = 8;
+	public long FIRE_DELAY = 200000000l;// 200 milliseconds -> 5
 												// bullets/second
 	public long nextShot = 0;
 
@@ -60,6 +60,10 @@ public class Rocket extends Actor {
 		getWorld().add(bullet);
 		nextShot = (long) (currentTime + FIRE_DELAY); // update the next time
 														// you can fire
+	}
+	
+	public Point2D getCenter() {
+		return new Point2D(this.getX() + this.getWidth()/2, this.getY() + this.getHeight()/2);
 	}
 
 }
