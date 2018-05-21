@@ -54,7 +54,14 @@ public class Game extends Application {
 		sa.setY(200);
 		rocketWorld.add(sa);
 		rocketWorld.setBackground(new Background(new BackgroundImage(new Image("images/space.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-		
+		PowerUp powerUp1 = new FasterBulletsPU();
+		powerUp1.setX(150);
+		powerUp1.setY(150);
+		PowerUp powerUp2 = new FasterAccelPU();
+		powerUp2.setX(190);
+		powerUp2.setY(155);
+		rocketWorld.add(powerUp1);
+		rocketWorld.add(powerUp2);
 		rocket.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
 			@Override
