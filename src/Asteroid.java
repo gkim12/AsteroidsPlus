@@ -14,6 +14,8 @@ public abstract class Asteroid extends Actor{
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				System.out.println(getClassName() + ":" + getHealth());
+				System.out.println(xVelocity);
+				System.out.println(yVelocity);
 			}
 			
 		});

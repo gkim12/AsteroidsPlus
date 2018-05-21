@@ -14,7 +14,7 @@ public class SmallAsteroid extends Asteroid{
 	public void act(long now) {
 
 	}
-
+	
 	@Override
 	public void updateImage() {
 		if(getHealth() <= 0) getWorld().remove(this);
