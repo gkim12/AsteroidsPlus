@@ -1,6 +1,9 @@
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class Rocket extends Actor {
 
@@ -13,12 +16,15 @@ public class Rocket extends Actor {
 	public final long FIRE_DELAY = 200000000;// 200 milliseconds -> 5
 												// bullets/second
 	public long nextShot = 0;
+	private AudioClip player;
 
 	public Rocket() {
 		setImage(new Image("images/rocket.png"));
 		isActing = false;
 		xSpeed = 0;
 		ySpeed = 0;
+		player = new AudioClip("file:src/audio/fire.wav");
+		player.setCycleCount(1);
 	}
 
 	@Override
@@ -39,8 +45,10 @@ public class Rocket extends Actor {
 		if (getWorld().isKeyDown(KeyCode.RIGHT) || getWorld().isKeyDown(KeyCode.D)) {
 			setRotate(getRotate() + 2.4); // THIS CONTROLS THE ANGLE
 		}
-		if (getWorld().isKeyDown(KeyCode.SPACE))
+		if (getWorld().isKeyDown(KeyCode.SPACE)) {
 			fireBullet(getRotate(), now);
+			player.play();
+		}
 	}
 
 	public void fireBullet(double angle, double currentTime) {
