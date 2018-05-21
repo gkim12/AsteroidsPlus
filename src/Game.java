@@ -43,6 +43,7 @@ public class Game extends Application {
 		rocket.setY(300);
 		rocket.setRotate(0);
 		rocketWorld.add(rocket);
+		rocketWorld.getChildren().add(new Lives());
 		//add a medium asteroid
 		MediumAsteroid ma = new MediumAsteroid();
 		ma.setX(900);
