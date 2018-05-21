@@ -1,4 +1,5 @@
-
+import javafx.scene.Node;
+import javafx.scene.text.Text;
 
 public abstract class PowerUp extends Actor {
 	
@@ -8,6 +9,11 @@ public abstract class PowerUp extends Actor {
 	private long finishTime;
 	private long initialValue; //value to be changed and returned to, whether it's acceleration, time or else.
 	private Rocket targetObject;
+	private Game thisGame;
+	
+	public PowerUp(Game g) {
+		thisGame = g;
+	}
 
 	
 	public void act(long now) {
@@ -19,11 +25,14 @@ public abstract class PowerUp extends Actor {
 		}
 		
 		if(touched) {
+			Node n = getThisGame().powerUpLabel.getChildren().get(0);
+			((Text) n).setText("" + (finishTime-now)/1000000000);
 			setX(targetObject.getCenter().getX() - this.getWidth()/2);
 			setY(targetObject.getCenter().getY() - this.getHeight()/2);
 			if(now >= finishTime) {
 				
 				end();
+				((Text) n).setText("" );
 				getWorld().remove(this);
 				
 			}
@@ -73,5 +82,10 @@ public abstract class PowerUp extends Actor {
 	
 	public void setTargetObject(Rocket targetObject) {
 		this.targetObject = targetObject;
+	}
+
+
+	public Game getThisGame() {
+		return thisGame;
 	}
 }

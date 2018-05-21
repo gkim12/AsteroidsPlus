@@ -19,7 +19,7 @@ public abstract class Asteroid extends Actor{
 		});
 	}
 	
-	
+
 	public int getHealth() {
 		return health;
 	}

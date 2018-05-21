@@ -40,10 +40,10 @@ public class Rocket extends Actor {
 			}
 		}
 		if (getWorld().isKeyDown(KeyCode.LEFT) || getWorld().isKeyDown(KeyCode.A)) {
-			setRotate(getRotate() - 2.4); // THIS CONTROLS THE ANGLE
+			setRotate(getRotate() - 2.9); // THIS CONTROLS THE ANGLE
 		}
 		if (getWorld().isKeyDown(KeyCode.RIGHT) || getWorld().isKeyDown(KeyCode.D)) {
-			setRotate(getRotate() + 2.4); // THIS CONTROLS THE ANGLE
+			setRotate(getRotate() + 2.9); // THIS CONTROLS THE ANGLE
 		}
 		if (getWorld().isKeyDown(KeyCode.SPACE)) {
 			fireBullet(getRotate(), now);
