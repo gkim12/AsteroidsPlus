@@ -1,4 +1,5 @@
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 
 public abstract class PowerUp extends Actor {
@@ -10,6 +11,7 @@ public abstract class PowerUp extends Actor {
 	private long initialValue; //value to be changed and returned to, whether it's acceleration, time or else.
 	private Rocket targetObject;
 	private Game thisGame;
+	private Image currentImage;
 	
 	public PowerUp(Game g) {
 		thisGame = g;
@@ -20,19 +22,20 @@ public abstract class PowerUp extends Actor {
 		//if touched by a rocket, launch the powerup, set finish time to 5 seconds after the time it was touched
 		if(hasIntersectingObjects() && getOneIntersectingObject(Rocket.class) != null && !touched) {
 			setTargetObject(getOneIntersectingObject(Rocket.class));
+			getWorld().getCurrentGame().getActivePU().add(this);
 			start();
 			finishTime = now + activeTime;
 		}
 		
 		if(touched) {
-			Node n = getThisGame().powerUpLabel.getChildren().get(0);
-			((Text) n).setText("" + (finishTime-now)/1000000000);
-			setX(targetObject.getCenter().getX() - this.getWidth()/2);
-			setY(targetObject.getCenter().getY() - this.getHeight()/2);
+			//Node n = getThisGame().powerUpLabel.getChildren().get(0);
+			//((Text) n).setText("" + (finishTime-now)/1000000000);
+			//setX(targetObject.getCenter().getX() - this.getWidth()/2);
+			//setY(targetObject.getCenter().getY() - this.getHeight()/2);
 			if(now >= finishTime) {
 				
 				end();
-				((Text) n).setText("" );
+				getWorld().getCurrentGame().getActivePU().remove(this);
 				getWorld().remove(this);
 				
 			}
@@ -82,6 +85,16 @@ public abstract class PowerUp extends Actor {
 	
 	public void setTargetObject(Rocket targetObject) {
 		this.targetObject = targetObject;
+	}
+
+
+	public Image getCurrentImage() {
+		return currentImage;
+	}
+
+
+	public void setCurrentImage(Image currentImage) {
+		this.currentImage = currentImage;
 	}
 
 

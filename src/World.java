@@ -8,8 +8,10 @@ import javafx.scene.layout.Pane;
 public abstract class World extends Pane {
 	private AnimationTimer timer;
 	private ArrayList<KeyCode> keyCodes;
+	private Game currentGame;
 
-	public World() {
+	public World(Game game) {
+		currentGame = game;
 		timer = new AnimationTimer() {
 			@Override
 			public void handle(long arg0) {
@@ -23,6 +25,10 @@ public abstract class World extends Pane {
 		};
 		keyCodes = new ArrayList<KeyCode>();
 		// start(); *We only call start in application (Game.java)*
+	}
+
+	public Game getCurrentGame() {
+		return currentGame;
 	}
 
 	public void start() {

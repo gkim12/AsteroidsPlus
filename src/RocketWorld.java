@@ -1,13 +1,18 @@
 import java.util.List;
 import java.util.Random;
 
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+
 public class RocketWorld extends World {
 	
 	public long nextSpawn = 0;
 	public final long SPAWN_DELAY = 2000000000l;
 	
-	public RocketWorld() {
-		super();
+	public RocketWorld(Game game) {
+		super(game);
 	}
 
 	@Override
@@ -19,6 +24,17 @@ public class RocketWorld extends World {
 		}	
 		
 		spawnAsteroid(now);
+		
+			getCurrentGame().powerUpLabel.getChildren().remove(1, getCurrentGame().powerUpLabel.getChildren().size());
+			if(getCurrentGame().getActivePU().size() > 0) {
+			for(PowerUp pu : getCurrentGame().getActivePU()) {
+				getCurrentGame().powerUpLabel.getChildren().add(new ImageView(pu.getImage()));
+				Text timerText = new Text("" + (pu.getFinishTime()-now)/1000000000);
+				timerText.setFont(new Font(15));
+				timerText.setFill(Color.CRIMSON);
+				getCurrentGame().powerUpLabel.getChildren().add(timerText);
+			}
+		}
 	}
 	
 	public void spawnAsteroid(double currentTime) {

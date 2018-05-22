@@ -9,6 +9,10 @@
  * to the world of Bitbucket and Git, and I look forward to further development on this
  * project.
  */
+
+import java.util.ArrayList;
+import java.util.List;
+
 import com.sun.xml.internal.ws.org.objectweb.asm.Label;
 
 import javafx.application.Application;
@@ -30,12 +34,15 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Game extends Application {
 	private boolean paused = false;
 	public HBox powerUpLabel;
+
+	private List<PowerUp> activePU;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -52,7 +59,7 @@ public class Game extends Application {
 		stage.setTitle("Demo");
 		stage.setResizable(false);
 		// Group root = new Group();
-		World rocketWorld = new RocketWorld();
+		World rocketWorld = new RocketWorld(this);
 		Rocket rocket = new Rocket();
 		rocketWorld.setBackground(new Background(new BackgroundImage(new Image("images/space.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
 		
@@ -94,6 +101,16 @@ public class Game extends Application {
 		/*
 		 * Mouse and Key events added
 		 */
+		
+		rocket.setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				powerUpLabel.getChildren().remove(0);
+			}
+
+		});
+		
 		rocketWorld.setOnMouseMoved(new EventHandler<MouseEvent>() {
 
 			@Override
@@ -119,17 +136,23 @@ public class Game extends Application {
 			}
 
 		});
+		activePU = new ArrayList<>();
 
 		BorderPane rocketPane = new BorderPane();
 		rocketPane.setCenter(rocketWorld);
 		HBox horizBar = new HBox();
 		horizBar.setPrefHeight(25);
-		horizBar.setPadding(new Insets(20));
+		horizBar.setPadding(new Insets(10));
 		horizBar.setSpacing(50);
 		horizBar.setBackground(new Background(new BackgroundFill(Color.AQUAMARINE, new CornerRadii(0), new Insets(0))));
 		horizBar.setAlignment(Pos.CENTER);
 		powerUpLabel = new HBox();
-		powerUpLabel.getChildren().add(new Text(""));
+		powerUpLabel.setAlignment(Pos.CENTER);
+		powerUpLabel.setSpacing(7);
+		Text PULabelStarting = new Text("Active Powerups: ");
+		PULabelStarting.setStyle("-fx-font-weight: bold");
+		PULabelStarting.setFont(new Font(10));
+		powerUpLabel.getChildren().add(PULabelStarting);
 		powerUpLabel.setPrefWidth(45);
 		
 		//powerUpLabel.setAlignment();
@@ -148,4 +171,8 @@ public class Game extends Application {
 		rocketWorld.requestFocus();
 	}
 
+	public List<PowerUp> getActivePU() {
+		return activePU;
+	}
+	
 }
