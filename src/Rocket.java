@@ -50,6 +50,13 @@ public class Rocket extends Actor {
 			fireBullet(getRotate(), now);
 			
 		}
+		if (getOneIntersectingObject(Asteroid.class) != null) {
+			getWorld().remove(this);
+			if (getWorld().getCurrentGame().getLives() > 0) {
+				getWorld().changeLives(getWorld().getCurrentGame().getLives() - 1);
+			}
+			return;
+		}
 	}
 
 	public void fireBullet(double angle, double currentTime) {

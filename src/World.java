@@ -74,4 +74,6 @@ public abstract class World extends Pane {
 	public ArrayList<KeyCode> getKeyCodes(){
 		return keyCodes;
 	}
+	
+	public abstract void changeLives(int i);
 }

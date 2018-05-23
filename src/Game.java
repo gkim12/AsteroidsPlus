@@ -13,15 +13,13 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.xml.internal.ws.org.objectweb.asm.Label;
-
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -39,8 +37,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Game extends Application {
-	private boolean paused = false;
 	public HBox powerUpLabel;
+	public HBox livesBox;
+	private int lives = 3;
 
 	private List<PowerUp> activePU;
 
@@ -70,7 +69,6 @@ public class Game extends Application {
 		rocket.setY(300);
 		rocket.setRotate(0);
 		rocketWorld.add(rocket);
-		rocketWorld.getChildren().add(new Lives());
 		//add a medium asteroid
 		
 		/*
@@ -156,8 +154,20 @@ public class Game extends Application {
 		powerUpLabel.getChildren().add(PULabelStarting);
 		powerUpLabel.setPrefWidth(45);
 		
+		livesBox = new HBox();
+		livesBox.setAlignment(Pos.CENTER);
+		Image rocketImage = new Image("images/rocket.png");
+		for (int i = 0; i < 3; i++) {
+			ImageView rocketView = new ImageView(rocketImage);
+			rocketView.setScaleX(0.5);
+			rocketView.setScaleY(0.5);
+			livesBox.getChildren().add(rocketView);
+		}
+		
+		
+		
 		//powerUpLabel.setAlignment();
-		horizBar.getChildren().addAll(powerUpLabel, new Text("'Asteroid' by Jake, Artur, George.   Designed in Cupertino, California"));
+		horizBar.getChildren().addAll(livesBox, powerUpLabel, new Text("'Asteroid' by Jake, Artur, George.   Designed in Cupertino, California"));
 		rocketPane.setBottom(horizBar);
 		Scene scene = new Scene(rocketPane, 1070, 710);
 		stage.setScene(scene);
@@ -165,8 +175,6 @@ public class Game extends Application {
 
 		stage.show();
 		
-		BorderPane pausedPane = new BorderPane();
-		Scene pausedScene = new Scene(pausedPane, 1080, 720);
 		
 
 		rocketWorld.requestFocus();
@@ -175,5 +183,14 @@ public class Game extends Application {
 	public List<PowerUp> getActivePU() {
 		return activePU;
 	}
+	
+	public void setLives(int i) {
+		lives = i;
+	}
+	
+	public int getLives() {
+		return lives;
+	}
+	
 	
 }

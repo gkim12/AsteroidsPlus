@@ -1,6 +1,7 @@
 import java.util.List;
 import java.util.Random;
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -10,6 +11,7 @@ public class RocketWorld extends World {
 	
 	public long nextSpawn = 0;
 	public final long SPAWN_DELAY = 2000000000l;
+	private Image rocketImage = new Image("file:/images/rocket.png");
 	
 	public RocketWorld(Game game) {
 		super(game);
@@ -25,8 +27,8 @@ public class RocketWorld extends World {
 		
 		spawnAsteroid(now);
 		
-			getCurrentGame().powerUpLabel.getChildren().remove(1, getCurrentGame().powerUpLabel.getChildren().size());
-			if(getCurrentGame().getActivePU().size() > 0) {
+		getCurrentGame().powerUpLabel.getChildren().remove(1, getCurrentGame().powerUpLabel.getChildren().size());
+		if(getCurrentGame().getActivePU().size() > 0) {
 			for(PowerUp pu : getCurrentGame().getActivePU()) {
 				getCurrentGame().powerUpLabel.getChildren().add(new ImageView(pu.getImage()));
 				Text timerText = new Text("" + (pu.getFinishTime()-now)/1000000000);
@@ -90,5 +92,12 @@ public class RocketWorld extends World {
 		
 		nextSpawn = (long) (currentTime + SPAWN_DELAY);
 	}
+
+	@Override
+	public void changeLives(int i) {
+		
+		
+	}
+	
 
 }
