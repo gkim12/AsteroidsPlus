@@ -9,15 +9,9 @@ import javafx.scene.text.Text;
 
 public class RocketWorld extends World {
 	
-<<<<<<< HEAD
 	public long nextAsteroidSpawn = 0;
 	public long nextPowerUpSpawn = 0;
 	public final long SPAWN_DELAY = 8000000000l;
-=======
-	public long nextSpawn = 0;
-
-	public final long SPAWN_DELAY = 20000000000l;
->>>>>>> branch 'master' of https://gkim22@bitbucket.org/2018_p2_group_9/2018_p2_group_9_game.git
 	
 	public RocketWorld(Game game) {
 		super(game);
