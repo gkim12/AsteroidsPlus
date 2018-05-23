@@ -24,6 +24,7 @@ public class Rocket extends Actor {
 		xSpeed = 0;
 		ySpeed = 0;
 		player = new AudioClip("file:src/audio/fire.wav");
+		player.setVolume(0.15);
 		player.setCycleCount(1);
 	}
 
@@ -40,14 +41,14 @@ public class Rocket extends Actor {
 			}
 		}
 		if (getWorld().isKeyDown(KeyCode.LEFT) || getWorld().isKeyDown(KeyCode.A)) {
-			setRotate(getRotate() - 2.4); // THIS CONTROLS THE ANGLE
+			setRotate(getRotate() - 2.9); // THIS CONTROLS THE ANGLE
 		}
 		if (getWorld().isKeyDown(KeyCode.RIGHT) || getWorld().isKeyDown(KeyCode.D)) {
-			setRotate(getRotate() + 2.4); // THIS CONTROLS THE ANGLE
+			setRotate(getRotate() + 2.9); // THIS CONTROLS THE ANGLE
 		}
 		if (getWorld().isKeyDown(KeyCode.SPACE)) {
 			fireBullet(getRotate(), now);
-			player.play();
+			
 		}
 	}
 
@@ -66,6 +67,7 @@ public class Rocket extends Actor {
 		bullet.setxVelocity(BULLET_SPEED * Math.cos(angleInRads));
 		bullet.setyVelocity(BULLET_SPEED * Math.sin(angleInRads));
 		getWorld().add(bullet);
+		player.play();
 		nextShot = (long) (currentTime + FIRE_DELAY); // update the next time
 														// you can fire
 	}

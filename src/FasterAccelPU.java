@@ -3,8 +3,9 @@ import javafx.scene.image.Image;
 public class FasterAccelPU extends PowerUp {
 
 
-	public FasterAccelPU() {
-		setImage(new Image("images/fireBall.png"));
+	public FasterAccelPU(Game g) {
+		super(g);
+		setImage(new Image("images/boostPU.png"));
 	}
 
 	@Override
@@ -12,7 +13,7 @@ public class FasterAccelPU extends PowerUp {
 		// TODO Auto-generated method stub
 		setTouched(true);
 		
-		setOpacity(0.6);
+		setOpacity(0);
 		setInitialValue((long)(getTargetObject().ROCKET_ACCEL * 100000));
 		getTargetObject().ROCKET_ACCEL = getTargetObject().ROCKET_ACCEL*2;
 	}

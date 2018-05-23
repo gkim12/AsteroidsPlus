@@ -3,15 +3,17 @@ import javafx.scene.image.Image;
 public class FasterBulletsPU extends PowerUp {
 
 	
-	public FasterBulletsPU() {
-		setImage(new Image("images/fireBall.png"));
+	public FasterBulletsPU(Game g) {
+		super(g);
+		setImage(new Image("images/firePU.png"));
+		//setCurrentImage(new Image);
 	}
 
 	@Override
 	public void start() {
 		
 		setInitialValue(getTargetObject().FIRE_DELAY);
-		setOpacity(0.6);
+		setOpacity(0);
 		setTouched(true);
 		getTargetObject().FIRE_DELAY = (long) (getInitialValue()*0.6); // increases fire rate
 		// TODO Auto-generated method stub
