@@ -39,7 +39,6 @@ import javafx.stage.Stage;
 public class Game extends Application {
 	public HBox powerUpLabel;
 	public HBox livesBox;
-	private int lives = 3;
 
 	private List<PowerUp> activePU;
 
@@ -156,13 +155,6 @@ public class Game extends Application {
 		
 		livesBox = new HBox();
 		livesBox.setAlignment(Pos.CENTER);
-		Image rocketImage = new Image("images/rocket.png");
-		for (int i = 0; i < 3; i++) {
-			ImageView rocketView = new ImageView(rocketImage);
-			rocketView.setScaleX(0.5);
-			rocketView.setScaleY(0.5);
-			livesBox.getChildren().add(rocketView);
-		}
 		
 		
 		
@@ -172,6 +164,7 @@ public class Game extends Application {
 		Scene scene = new Scene(rocketPane, 1070, 710);
 		stage.setScene(scene);
 		rocketWorld.start();
+		rocket.changeLives(3);
 
 		stage.show();
 		
@@ -184,13 +177,7 @@ public class Game extends Application {
 		return activePU;
 	}
 	
-	public void setLives(int i) {
-		lives = i;
-	}
-	
-	public int getLives() {
-		return lives;
-	}
+
 	
 	
 }

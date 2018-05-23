@@ -75,5 +75,4 @@ public abstract class World extends Pane {
 		return keyCodes;
 	}
 	
-	public abstract void changeLives(int i);
 }

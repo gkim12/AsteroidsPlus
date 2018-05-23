@@ -93,11 +93,7 @@ public class RocketWorld extends World {
 		nextSpawn = (long) (currentTime + SPAWN_DELAY);
 	}
 
-	@Override
-	public void changeLives(int i) {
 		
 		
-	}
-	
 
 }
