@@ -4,15 +4,13 @@ public class BigAsteroid extends Asteroid{
 
 	public BigAsteroid() {
 		super();
-		setHealth(20);
+		setHealth(15);
 		setImage(new Image("images/ball.png"));
-		setxVelocity(25);
-		setyVelocity(25);
 	}
 	
 	@Override
 	public void act(long now) {
-	
+		move(getxVelocity(), getyVelocity());
 	}
 
 	@Override

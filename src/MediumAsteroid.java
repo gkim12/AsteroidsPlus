@@ -7,13 +7,11 @@ public class MediumAsteroid extends Asteroid{
 		super();
 		setHealth(10);
 		setImage(new Image("images/asteroid.png"));
-		setxVelocity(0);
-		setyVelocity(0);  
 	}
 	
 	@Override
 	public void act(long now) {
-
+		move(getxVelocity(), getyVelocity());
 	}
 
 	@Override

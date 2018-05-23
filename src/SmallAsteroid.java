@@ -6,13 +6,11 @@ public class SmallAsteroid extends Asteroid{
 		super();
 		setHealth(5);
 		setImage(new Image("images/fireball.png"));
-		setxVelocity(0);
-		setyVelocity(0);
 	}
 
 	@Override
 	public void act(long now) {
-
+		move(getxVelocity(), getyVelocity());
 	}
 	
 	@Override
