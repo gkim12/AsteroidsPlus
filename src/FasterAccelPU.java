@@ -3,8 +3,8 @@ import javafx.scene.image.Image;
 public class FasterAccelPU extends PowerUp {
 
 
-	public FasterAccelPU(Game g) {
-		super(g);
+	public FasterAccelPU() {
+		super();
 		setImage(new Image("images/boostPU.png"));
 	}
 

@@ -3,8 +3,8 @@ import javafx.scene.image.Image;
 public class FasterBulletsPU extends PowerUp {
 
 	
-	public FasterBulletsPU(Game g) {
-		super(g);
+	public FasterBulletsPU() {
+		super();
 		setImage(new Image("images/firePU.png"));
 		//setCurrentImage(new Image);
 	}

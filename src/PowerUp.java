@@ -10,11 +10,9 @@ public abstract class PowerUp extends Actor {
 	private long finishTime;
 	private long initialValue; //value to be changed and returned to, whether it's acceleration, time or else.
 	private Rocket targetObject;
-	private Game thisGame;
 	private Image currentImage;
 	
-	public PowerUp(Game g) {
-		thisGame = g;
+	public PowerUp() {
 	}
 
 	
@@ -95,10 +93,5 @@ public abstract class PowerUp extends Actor {
 
 	public void setCurrentImage(Image currentImage) {
 		this.currentImage = currentImage;
-	}
-
-
-	public Game getThisGame() {
-		return thisGame;
 	}
 }

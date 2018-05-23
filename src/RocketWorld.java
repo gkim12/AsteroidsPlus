@@ -8,8 +8,9 @@ import javafx.scene.text.Text;
 
 public class RocketWorld extends World {
 	
-	public long nextSpawn = 0;
-	public final long SPAWN_DELAY = 20000000000l;
+	public long nextAsteroidSpawn = 0;
+	public long nextPowerUpSpawn = 0;
+	public final long SPAWN_DELAY = 8000000000l;
 	
 	public RocketWorld(Game game) {
 		super(game);
@@ -24,6 +25,7 @@ public class RocketWorld extends World {
 		}	
 		
 		spawnAsteroid(now);
+		spawnPowerUp(now);
 		
 			getCurrentGame().powerUpLabel.getChildren().remove(1, getCurrentGame().powerUpLabel.getChildren().size());
 			if(getCurrentGame().getActivePU().size() > 0) {
@@ -38,7 +40,7 @@ public class RocketWorld extends World {
 	}
 	
 	public void spawnAsteroid(double currentTime) {
-		if(currentTime < nextSpawn)
+		if(currentTime < nextAsteroidSpawn)
 			return;
 		Asteroid a = null;
 		double speedConstant = 0;
@@ -88,7 +90,28 @@ public class RocketWorld extends World {
 		a.setxVelocity(dirX * speedConstant);
 		a.setyVelocity(dirY * speedConstant);
 		
-		nextSpawn = (long) (currentTime + SPAWN_DELAY);
+		nextAsteroidSpawn = (long) (currentTime + SPAWN_DELAY);
 	}
-
+	
+	public void spawnPowerUp(double currentTime) {
+		if(currentTime < nextPowerUpSpawn)
+			return;
+		PowerUp pu = null;
+		switch(new Random().nextInt(2)){
+		case 0:
+			pu = new FasterAccelPU();
+			break;
+		case 1:
+			pu = new FasterBulletsPU();
+			break;
+		}
+		add(pu);
+		
+		double xPos = new Random().nextInt(1070);
+		double yPos = new Random().nextInt(710);
+		pu.setX(xPos);
+		pu.setY(yPos);
+		
+		nextPowerUpSpawn = (long) (currentTime + SPAWN_DELAY);
+	}
 }

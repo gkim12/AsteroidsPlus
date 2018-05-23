@@ -88,10 +88,10 @@ public class Game extends Application {
 		/*
 		 * PowerUps are added
 		 */
-		PowerUp powerUp1 = new FasterBulletsPU(this);
+		PowerUp powerUp1 = new FasterBulletsPU();
 		powerUp1.setX(150);
 		powerUp1.setY(150);
-		PowerUp powerUp2 = new FasterAccelPU(this);
+		PowerUp powerUp2 = new FasterAccelPU();
 		powerUp2.setX(190);
 		powerUp2.setY(155);
 		rocketWorld.add(powerUp1);
