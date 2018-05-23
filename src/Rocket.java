@@ -18,7 +18,6 @@ public class Rocket extends Actor {
 	public long nextShot = 0;
 	private AudioClip player;
 	private int lives = 3;
-	public int random = 0;
 
 	public Rocket() {
 		setImage(new Image("images/rocket.png"));
