@@ -99,5 +99,8 @@ public class Rocket extends Actor {
 			livesB.getChildren().add(rocketView);
 		}
 	}
-
+	
+	public int getLives() {
+		return lives;
+	}
 }

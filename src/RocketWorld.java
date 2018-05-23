@@ -98,12 +98,15 @@ public class RocketWorld extends World {
 		if(currentTime < nextPowerUpSpawn)
 			return;
 		PowerUp pu = null;
-		switch(new Random().nextInt(2)){
+		switch(new Random().nextInt(3)){
 		case 0:
 			pu = new FasterAccelPU();
 			break;
 		case 1:
 			pu = new FasterBulletsPU();
+			break;
+		case 2:
+			pu = new ExtraLifePU();
 			break;
 		}
 		add(pu);
