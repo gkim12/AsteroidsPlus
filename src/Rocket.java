@@ -1,9 +1,9 @@
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.HBox;
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 
 public class Rocket extends Actor {
 
@@ -17,6 +17,7 @@ public class Rocket extends Actor {
 												// bullets/second
 	public long nextShot = 0;
 	private AudioClip player;
+	private int lives = 3;
 
 	public Rocket() {
 		setImage(new Image("images/rocket.png"));
@@ -50,6 +51,14 @@ public class Rocket extends Actor {
 			fireBullet(getRotate(), now);
 			
 		}
+		if (getOneIntersectingObject(Asteroid.class) != null) {
+			setX(1070 / 2 - getWidth() / 2);
+			setY(710 / 2-  getHeight() / 2);
+			if (lives > 0) {
+				changeLives(lives - 1);
+			}
+			return;
+		}
 	}
 
 	public void fireBullet(double angle, double currentTime) {
@@ -74,6 +83,19 @@ public class Rocket extends Actor {
 	
 	public Point2D getCenter() {
 		return new Point2D(this.getX() + this.getWidth()/2, this.getY() + this.getHeight()/2);
+	}
+	
+	public void changeLives(int l) {
+		lives = l;
+		HBox livesB = getWorld().getCurrentGame().livesBox;
+		livesB.getChildren().remove(0, livesB.getChildren().size());
+		Image rocketImage = new Image("images/rocket.png");
+		for (int i = 0; i < l; i++) {
+			ImageView rocketView = new ImageView(rocketImage);
+			rocketView.setScaleX(0.5);
+			rocketView.setScaleY(0.5);
+			livesB.getChildren().add(rocketView);
+		}
 	}
 
 }
