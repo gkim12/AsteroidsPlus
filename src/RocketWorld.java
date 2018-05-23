@@ -10,8 +10,8 @@ import javafx.scene.text.Text;
 public class RocketWorld extends World {
 	
 	public long nextSpawn = 0;
-	public final long SPAWN_DELAY = 2000000000l;
-	private Image rocketImage = new Image("file:/images/rocket.png");
+
+	public final long SPAWN_DELAY = 20000000000l;
 	
 	public RocketWorld(Game game) {
 		super(game);
@@ -79,6 +79,7 @@ public class RocketWorld extends World {
 			xPos = new Random().nextInt(1070);
 			break;
 		}
+		add(a);
 		a.setX(xPos);
 		a.setY(yPos);
 		
@@ -88,7 +89,6 @@ public class RocketWorld extends World {
 		double dirY = (r.getY() - a.getY()) / dir;
 		a.setxVelocity(dirX * speedConstant);
 		a.setyVelocity(dirY * speedConstant);
-		add(a);
 		
 		nextSpawn = (long) (currentTime + SPAWN_DELAY);
 	}
