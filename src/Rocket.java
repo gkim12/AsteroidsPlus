@@ -56,6 +56,8 @@ public class Rocket extends Actor {
 			setY(710 / 2-  getHeight() / 2);
 			if (lives > 0) {
 				changeLives(lives - 1);
+			} else {
+				System.exit(0);
 			}
 			return;
 		}
