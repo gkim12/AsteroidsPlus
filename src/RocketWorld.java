@@ -12,6 +12,7 @@ public class RocketWorld extends World {
 	public long nextAsteroidSpawn = 0;
 	public long nextPowerUpSpawn = 0;
 	public final long SPAWN_DELAY = 8000000000l;
+	public int random = 0;
 	
 	public RocketWorld(Game game) {
 		super(game);
