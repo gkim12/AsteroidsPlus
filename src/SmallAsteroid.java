@@ -16,7 +16,7 @@ public class SmallAsteroid extends Asteroid{
 	@Override
 	public void updateImage() {
 		if(getHealth() <= 0) {
-			getWorld().addScore((int)(RocketWorld.PTS_ASTEROID_DESTOYED * getWorld().getPTS_coef()));
+			getWorld().addScore((int)(1 * RocketWorld.PTS_ASTEROID_DESTOYED * getWorld().getPTS_coef()));
 			getWorld().remove(this);
 		}
 	}

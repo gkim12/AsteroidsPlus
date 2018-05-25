@@ -18,7 +18,7 @@ public class BigAsteroid extends Asteroid{
 		//if(getHealth() < 10) setImage(new Image("images/bigAsteroidCracked"));
 		//if(getHealth() < 5) setImage(new Image("images/bigAsteroidVeryCracked"));
 		if(getHealth() <= 0) {
-			getWorld().addScore((int)(RocketWorld.PTS_ASTEROID_DESTOYED * getWorld().getPTS_coef()));
+			getWorld().addScore((int)(3 * RocketWorld.PTS_ASTEROID_DESTOYED * getWorld().getPTS_coef()));
 			getWorld().remove(this);
 		}
 	}
