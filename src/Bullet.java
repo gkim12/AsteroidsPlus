@@ -7,7 +7,7 @@ public class Bullet extends Actor{
 	private int aliveTime;
 	
 	public Bullet() {
-		setImage(new Image("images/bullet.png"));
+		setImage(new Image("images/bullet2.png"));
 		xVelocity = 200;
 		yVelocity = -200;
 		aliveTime = 0;
@@ -24,6 +24,7 @@ public class Bullet extends Actor{
 		if (hasIntersectingObjects() && getIntersectingObjects(Asteroid.class).size() > 0) {
 			Asteroid asteroid = getIntersectingObjects(Asteroid.class).get(0);
 			asteroid.setHealth(asteroid.getHealth() - 1);
+			getWorld().addScore((int)(RocketWorld.PTS_HIT_TARGET * getWorld().getPTS_coef()));
 			System.out.println(asteroid.getClassName() + ":" + asteroid.getHealth());
 			getWorld().remove(this);
 			return;

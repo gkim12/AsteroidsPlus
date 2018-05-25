@@ -12,12 +12,17 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -39,6 +44,9 @@ import javafx.stage.Stage;
 public class Game extends Application {
 	public HBox powerUpLabel;
 	public HBox livesBox;
+	public HBox scoreBox;
+	private int highestScore;
+	
 
 	private List<PowerUp> activePU;
 
@@ -92,21 +100,55 @@ public class Game extends Application {
 		PowerUp powerUp2 = new FasterAccelPU();
 		powerUp2.setX(190);
 		powerUp2.setY(155);
+		PowerUp powerUp3 = new ShieldPU();
+		powerUp3.setX(230);
+		powerUp3.setY(160);
 		rocketWorld.add(powerUp1);
 		rocketWorld.add(powerUp2);
-		
+		rocketWorld.add(powerUp3);
+			
 		
 		/*
 		 * Mouse and Key events added
 		 */
 		
+		powerUp1.setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				Image i = Rocket.SHIELD_IMG;
+				powerUp1.setImage(i);
+			}
+
+		});
+		
 		rocket.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
-				powerUpLabel.getChildren().remove(0);
+				//powerUpLabel.getChildren().remove(0);
+				System.out.println();
+				
+				System.out.println(rocket.getClass().getName());
+				System.out.println("Lives: " + rocket.getLives());
+				System.out.println("Fire_d: " + rocket.FIRE_DELAY/10e8);
+				System.out.println("Accel: " + rocket.ROCKET_ACCEL);
+				System.out.println("k: " + rocketWorld.PTS_coef);
+				
+				System.out.println();
+			
 			}
 
+		});
+		
+		rocket.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				rocketWorld.gameOver();
+			}
+			
 		});
 		
 		rocketWorld.setOnMouseMoved(new EventHandler<MouseEvent>() {
@@ -154,12 +196,21 @@ public class Game extends Application {
 		powerUpLabel.setPrefWidth(45);
 		
 		livesBox = new HBox();
+		livesBox.getChildren().add(new ImageView(new Image("images/rocket.png")));
+		livesBox.getChildren().add(new Text());
 		livesBox.setAlignment(Pos.CENTER);
 		
+		scoreBox = new HBox();
+		Text scoreText = new Text("Score: ");
+		scoreText.setStyle("-fx-font-weight: bold");
+		Text scoreNum = new Text("" + rocketWorld.getScore());
+		scoreNum.setStyle("-fx-font-style: italic");
 		
+		scoreBox.getChildren().addAll(scoreText, scoreNum);
+		scoreBox.setAlignment(Pos.CENTER);
 		
 		//powerUpLabel.setAlignment();
-		horizBar.getChildren().addAll(livesBox, powerUpLabel, new Text("'Asteroid' by Jake, Artur, George.   Designed in Cupertino, California"));
+		horizBar.getChildren().addAll(scoreBox, livesBox, powerUpLabel, new Text("'Asteroid' by Jake, Artur, George.   Designed in Cupertino, California"));
 		rocketPane.setBottom(horizBar);
 		Scene scene = new Scene(rocketPane, 1070, 710);
 		stage.setScene(scene);
@@ -176,6 +227,28 @@ public class Game extends Application {
 	public List<PowerUp> getActivePU() {
 		return activePU;
 	}
+	
+	
+	
+	public int getHighestScore() {
+		return highestScore;
+	}
+
+	public void setHighestScore(int highestScore) {
+		this.highestScore = highestScore;
+	}
+
+	public <A extends PowerUp> boolean containsPUOfClass(java.lang.Class c) {
+		for(PowerUp p: activePU) if(p.getClass().equals(c)) return true;
+		return false;
+	}
+	
+	public <A extends PowerUp> PowerUp getPUOfClass(java.lang.Class c) {
+		for(PowerUp p: activePU) if(p.getClass().equals(c)) return p;
+		return null;
+	}
+	
+	
 	
 
 	

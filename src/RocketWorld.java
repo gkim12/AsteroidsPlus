@@ -11,7 +11,13 @@ public class RocketWorld extends World {
 	
 	public long nextAsteroidSpawn = 0;
 	public long nextPowerUpSpawn = 0;
-	public final long SPAWN_DELAY = 8000000000l;
+	public final long AST_SPAWN_DELAY = 8000000000l;
+	public final long PU_SPAWN_DELAY = 6000000000l;
+	
+	
+	public static final int PTS_POWERUP = 50;
+	public static final int PTS_HIT_TARGET = 25;
+	public static final int PTS_ASTEROID_DESTOYED = 150;
 	
 	public RocketWorld(Game game) {
 		super(game);
@@ -24,7 +30,7 @@ public class RocketWorld extends World {
 		for(int i = 0; i < listBullets.size(); i++) {
 			if(Math.abs(listBullets.get(i).getX()) > 2000 || Math.abs(listBullets.get(i).getY())  > 2000) remove(listBullets.get(i));
 		}	
-		
+		updateScore();
 		spawnAsteroid(now);
 		spawnPowerUp(now);
 		
@@ -91,14 +97,14 @@ public class RocketWorld extends World {
 		a.setxVelocity(dirX * speedConstant);
 		a.setyVelocity(dirY * speedConstant);
 		
-		nextAsteroidSpawn = (long) (currentTime + SPAWN_DELAY);
+		nextAsteroidSpawn = (long) (currentTime + AST_SPAWN_DELAY);
 	}
 
 	public void spawnPowerUp(double currentTime) {
 		if(currentTime < nextPowerUpSpawn)
 			return;
 		PowerUp pu = null;
-		switch(new Random().nextInt(3)){
+		switch(new Random().nextInt(5)){
 		case 0:
 			pu = new FasterAccelPU();
 			break;
@@ -108,6 +114,12 @@ public class RocketWorld extends World {
 		case 2:
 			pu = new ExtraLifePU();
 			break;
+		case 3:
+			pu = new ShieldPU();
+			break;
+		case 4:
+			pu = new X2PU();
+			break;
 		}
 		add(pu);
 		
@@ -116,6 +128,14 @@ public class RocketWorld extends World {
 		pu.setX(xPos);
 		pu.setY(yPos);
 		
-		nextPowerUpSpawn = (long) (currentTime + SPAWN_DELAY);
+		nextPowerUpSpawn = (long) (currentTime + PU_SPAWN_DELAY);
 	}
+	
+	public void updateScore() {
+		Text t = (Text) getCurrentGame().scoreBox.getChildren().get(1);
+		t.setText("" + getScore());
+	}
+
+	
+
 }

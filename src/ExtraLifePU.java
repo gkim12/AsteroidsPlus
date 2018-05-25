@@ -5,6 +5,9 @@ public class ExtraLifePU extends PowerUp {
 	public ExtraLifePU() {
 		super();
 		setImage(new Image("images/rocket.png"));
+		setScaleX(0.7);
+		setScaleY(0.7);
+		setActiveTime(0);
 	}
 
 	@Override

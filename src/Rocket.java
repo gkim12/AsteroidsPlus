@@ -4,17 +4,20 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.AudioClip;
+import javafx.scene.text.Text;
 
 public class Rocket extends Actor {
 
 	private double xSpeed;
 	private double ySpeed;
 	private boolean isActing;
+	private boolean shieldOn;
 	public final double BULLET_SPEED = 20;
 	public double ROCKET_ACCEL = .11;
 	public final double ROCKET_MAX_SPEED = 8;
 	public long FIRE_DELAY = 200000000l;// 200 milliseconds -> 5
 												// bullets/second
+	public static final Image SHIELD_IMG = new Image("file:ball.png"); 
 	public long nextShot = 0;
 	private AudioClip player;
 	private int lives = 3;
@@ -22,6 +25,7 @@ public class Rocket extends Actor {
 	public Rocket() {
 		setImage(new Image("images/rocket.png"));
 		isActing = false;
+		shieldOn = false;
 		xSpeed = 0;
 		ySpeed = 0;
 		player = new AudioClip("file:src/audio/fire.wav");
@@ -52,13 +56,39 @@ public class Rocket extends Actor {
 			
 		}
 		if (getOneIntersectingObject(Asteroid.class) != null) {
-			setX(1070 / 2 - getWidth() / 2);
-			setY(710 / 2-  getHeight() / 2);
-			if (lives > 0) {
-				changeLives(lives - 1);
-			} else {
-				System.exit(0);
+			if(!isShieldOn()) {
+				
+				changeLives(Math.max(lives-1, 0));
+				
+				if(lives < 1) {
+					getWorld().gameOver();
+					return;
+				}
+				
+				double resetX = 1070 / 2 - getWidth() / 2;
+				double resetY = 710 / 2-  getHeight() / 2;
+				
+				setX(resetX);
+				setY(resetY);
+				xSpeed = 0;
+				ySpeed = 0;
+				
+				for(Actor a: getIntersectingObjects(Actor.class)) {
+					if(!a.equals(this)) getWorld().remove(a);
+				}
+//				
+//				else {
+//					getWorld().gameOver();
+//				}
+				
 			}
+			if(isShieldOn()){
+				Asteroid a = getOneIntersectingObject(Asteroid.class);
+				getWorld().addScore((int) (RocketWorld.PTS_ASTEROID_DESTOYED * getWorld().getPTS_coef()));
+				getWorld().remove(a);
+				return;
+			}
+			
 			return;
 		}
 	}
@@ -92,15 +122,28 @@ public class Rocket extends Actor {
 		HBox livesB = getWorld().getCurrentGame().livesBox;
 		livesB.getChildren().remove(0, livesB.getChildren().size());
 		Image rocketImage = new Image("images/rocket.png");
-		for (int i = 0; i < l; i++) {
+		//for (int i = 0; i < l; i++) {
 			ImageView rocketView = new ImageView(rocketImage);
-			rocketView.setScaleX(0.5);
-			rocketView.setScaleY(0.5);
+			rocketView.setScaleX(0.3);
+			rocketView.setScaleY(0.3);
 			livesB.getChildren().add(rocketView);
-		}
+		//}
+			livesB.getChildren().add(new Text("X  " + lives));
+			Text t = (Text) (livesB.getChildren().get(1));
+			t.setStyle("-fx-font-weight: bold");
 	}
+	
+	
 	
 	public int getLives() {
 		return lives;
+	}
+
+	public boolean isShieldOn() {
+		return shieldOn;
+	}
+
+	public void setShieldOn(boolean shieldOn) {
+		this.shieldOn = shieldOn;
 	}
 }

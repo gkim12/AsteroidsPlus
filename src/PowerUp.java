@@ -4,7 +4,7 @@ import javafx.scene.text.Text;
 
 public abstract class PowerUp extends Actor {
 	
-	private long activeTime = 5000000000l; //5 seconds, 'l' for long
+	private long activeTime = 7000000000l; //5 seconds, 'l' for long
 	//active time is same for all, though changeable
 	private boolean touched = false;
 	private long finishTime;

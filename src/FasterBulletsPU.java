@@ -23,7 +23,7 @@ public class FasterBulletsPU extends PowerUp {
 	@Override
 	public void end() {
 		// TODO Auto-generated method stub
-		getTargetObject().FIRE_DELAY = getInitialValue();
+		getTargetObject().FIRE_DELAY = (long) (getTargetObject().FIRE_DELAY/0.6);
 		
 	}
 

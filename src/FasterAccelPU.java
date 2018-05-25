@@ -15,13 +15,13 @@ public class FasterAccelPU extends PowerUp {
 		
 		setOpacity(0);
 		setInitialValue((long)(getTargetObject().ROCKET_ACCEL * 100000));
-		getTargetObject().ROCKET_ACCEL = getTargetObject().ROCKET_ACCEL*2;
+		getTargetObject().ROCKET_ACCEL = getTargetObject().ROCKET_ACCEL + 0.11;
 	}
 
 	@Override
 	public void end() {
 		// TODO Auto-generated method stub
-		getTargetObject().ROCKET_ACCEL = (double)getInitialValue()/100000;
+		getTargetObject().ROCKET_ACCEL = getTargetObject().ROCKET_ACCEL - 0.11;
 	}
 
 	
