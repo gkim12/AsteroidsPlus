@@ -18,9 +18,15 @@ public class MediumAsteroid extends Asteroid{
 	public void updateImage() {
 		if(getHealth() < 5) setImage(new Image("images/asteroidCracked.png"));
 		if(getHealth() <= 0) {
-			getWorld().addScore((int)(2 * RocketWorld.PTS_ASTEROID_DESTOYED * getWorld().getPTS_coef()));
+			getWorld().addScore((int)(getScoreCoef() * RocketWorld.PTS_ASTEROID_DESTOYED * getWorld().getPTS_coef()));
 			getWorld().remove(this);
 		}
+	}
+
+	@Override
+	public double getScoreCoef() {
+		// TODO Auto-generated method stub
+		return 2;
 	}
 
 }

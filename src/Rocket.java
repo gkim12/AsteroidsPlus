@@ -65,13 +65,7 @@ public class Rocket extends Actor {
 					return;
 				}
 				
-				double resetX = 1070 / 2 - getWidth() / 2;
-				double resetY = 710 / 2-  getHeight() / 2;
-				
-				setX(resetX);
-				setY(resetY);
-				xSpeed = 0;
-				ySpeed = 0;
+				resetPos();
 				
 				for(Actor a: getIntersectingObjects(Actor.class)) {
 					if(!a.equals(this)) getWorld().remove(a);
@@ -137,6 +131,16 @@ public class Rocket extends Actor {
 	
 	public int getLives() {
 		return lives;
+	}
+	
+	public void resetPos() {
+		double resetX = 1070 / 2 - getWidth() / 2;
+		double resetY = 710 / 2-  getHeight() / 2;
+		
+		setX(resetX);
+		setY(resetY);
+		xSpeed = 0;
+		ySpeed = 0;
 	}
 
 	public boolean isShieldOn() {

@@ -25,6 +25,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -42,6 +43,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Game extends Application {
+	
+	World rocketWorld;
+	Rocket rocket;
+	
 	public HBox powerUpLabel;
 	public HBox livesBox;
 	public HBox scoreBox;
@@ -65,8 +70,8 @@ public class Game extends Application {
 		stage.setTitle("Demo");
 		stage.setResizable(false);
 		// Group root = new Group();
-		World rocketWorld = new RocketWorld(this);
-		Rocket rocket = new Rocket();
+		rocketWorld = new RocketWorld(this);
+		rocket = new Rocket();
 		rocketWorld.setBackground(new Background(new BackgroundImage(new Image("images/space.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
 		
 		/*
@@ -127,15 +132,15 @@ public class Game extends Application {
 			@Override
 			public void handle(MouseEvent arg0) {
 				//powerUpLabel.getChildren().remove(0);
-				System.out.println();
-				
-				System.out.println(rocket.getClass().getName());
-				System.out.println("Lives: " + rocket.getLives());
-				System.out.println("Fire_d: " + rocket.FIRE_DELAY/10e8);
-				System.out.println("Accel: " + rocket.ROCKET_ACCEL);
-				System.out.println("k: " + rocketWorld.PTS_coef);
-				
-				System.out.println();
+//				System.out.println();
+//				
+//				System.out.println(rocket.getClass().getName());
+//				System.out.println("Lives: " + rocket.getLives());
+//				System.out.println("Fire_d: " + rocket.FIRE_DELAY/10e8);
+//				System.out.println("Accel: " + rocket.ROCKET_ACCEL);
+//				System.out.println("k: " + rocketWorld.PTS_coef);
+//				
+//				System.out.println();
 			
 			}
 
@@ -146,7 +151,7 @@ public class Game extends Application {
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				rocketWorld.gameOver();
+				rocketWorld.printPressedKeys();
 			}
 			
 		});
@@ -177,6 +182,10 @@ public class Game extends Application {
 
 		});
 		activePU = new ArrayList<>();
+		
+		/*
+		 * UI Settings
+		 */
 
 		BorderPane rocketPane = new BorderPane();
 		rocketPane.setCenter(rocketWorld);
@@ -228,7 +237,11 @@ public class Game extends Application {
 		return activePU;
 	}
 	
-	
+	public void removeActivePUs() {
+		for(int i = 0; i < activePU.size(); i++) {
+			activePU.remove(0);
+		}
+	}
 	
 	public int getHighestScore() {
 		return highestScore;
@@ -248,7 +261,14 @@ public class Game extends Application {
 		return null;
 	}
 	
-	
+	public void resetGame() {
+		rocket.resetPos();
+		rocket.changeLives(3);
+		rocketWorld.setPaused(false);
+		rocketWorld.setScore(0);
+		rocketWorld.removePressedKeys();
+		
+	}
 	
 
 	

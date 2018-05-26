@@ -11,7 +11,7 @@ public class RocketWorld extends World {
 	
 	public long nextAsteroidSpawn = 0;
 	public long nextPowerUpSpawn = 0;
-	public final long AST_SPAWN_DELAY = 8000000000l;
+	public final long AST_SPAWN_DELAY = 6000000000l;
 	public final long PU_SPAWN_DELAY = 6000000000l;
 	
 	

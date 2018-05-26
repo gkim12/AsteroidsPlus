@@ -51,4 +51,6 @@ public abstract class Asteroid extends Actor{
 	public String getClassName() {
 		return this.getClass().getName();
 	}
+	
+	public abstract double getScoreCoef();
 }

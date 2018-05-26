@@ -5,7 +5,7 @@ public class ShieldPU extends PowerUp {
 	
 	public ShieldPU() {
 		super();
-		setActiveTime(10000000000l);
+		setActiveTime(5000000000l);
 		setImage(new Image("images/shieldPU.png"));
 	}
 	

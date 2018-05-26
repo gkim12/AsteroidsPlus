@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 
 import javafx.animation.AnimationTimer;
@@ -53,6 +54,10 @@ public abstract class World extends Pane {
 	public int getScore() {
 		return score;
 	}
+	
+	public void setScore(int score) {
+		this.score = score;
+	}
 
 	public void addScore(int score) {
 		this.score+=score;
@@ -102,6 +107,19 @@ public abstract class World extends Pane {
 //		System.out.println("released " + c.getName());
 		return keyCodes.remove(c);
 	}
+	
+	public void removePressedKeys(){
+		for(int i = 0; i < keyCodes.size(); i++) {
+			keyCodes.remove(0);
+		}
+	}
+	
+	public void printPressedKeys() {
+		for(int i = 0; i < keyCodes.size(); i++) {
+			System.out.print(keyCodes.get(i).toString() + " ");
+		}
+		System.out.println();
+	}
 
 	public boolean isKeyDown(KeyCode c) {
 		return keyCodes.contains(c);
@@ -130,16 +148,32 @@ public void gameOver() {
 		}
 		Alert lostAlert = new Alert(AlertType.INFORMATION, "Your final score was " + getScore() + "\n\n" + scoreEval, ButtonType.OK);
 		lostAlert.setHeaderText("You lost! Better luck next time.");
+		
+		Alert nextGame = new Alert(AlertType.CONFIRMATION, "Would you like to continue?", ButtonType.YES, ButtonType.NO);
+		nextGame.setHeaderText("Choose what to do next.");
+		
 		lostAlert.setOnHidden(new EventHandler<DialogEvent>() {
 
 			@Override
 			public void handle(DialogEvent arg0) {
 				// TODO Auto-generated method stub
 				lostAlert.close();
+				
+				Optional<ButtonType> r = nextGame.showAndWait();
+				
+				if(r.get() == ButtonType.YES){
+					getCurrentGame().resetGame();
+				} else {
+					System.exit(0);
+				}
 			}
 			
 		});
+		
+		
 		lostAlert.show();
+		
+		
 		
 	}
 	
