@@ -1,14 +1,18 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogEvent;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 
@@ -20,6 +24,7 @@ public abstract class World extends Pane {
 	private int score = 0;
 	
 	public double PTS_coef = 1;
+	private FileWriter scoreWriter;
 
 	public World(Game game) {
 		currentGame = game;
@@ -37,6 +42,11 @@ public abstract class World extends Pane {
 		};
 		keyCodes = new ArrayList<KeyCode>();
 		// start(); *We only call start in application (Game.java)*
+		try {
+			scoreWriter = new FileWriter("scores.txt", true);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Game getCurrentGame() {
@@ -136,7 +146,7 @@ public abstract class World extends Pane {
 		PTS_coef = pTS_coef;
 	}
 	
-public void gameOver() {
+	public void gameOver() {
 		paused = true;
 		String scoreEval = "";
 		if(getScore() > getCurrentGame().getHighestScore()) {
@@ -147,7 +157,12 @@ public void gameOver() {
 			scoreEval = "Your record was " + getCurrentGame().getHighestScore();
 		}
 		Alert lostAlert = new Alert(AlertType.INFORMATION, "Your final score was " + getScore() + "\n\n" + scoreEval, ButtonType.OK);
-		lostAlert.setHeaderText("You lost! Better luck next time.");
+		lostAlert.setHeaderText("You lost! Better luck next time." + "\n\n" + "High Scores:\n" + getHighScores());
+		
+		TextInputDialog highScoreDialog = new TextInputDialog();
+		highScoreDialog.setTitle("High Score");
+		highScoreDialog.setHeaderText("Enter your name to save your high score (or leave blank for a default name):");
+		highScoreDialog.setContentText("Name:");
 		
 		Alert nextGame = new Alert(AlertType.CONFIRMATION, "Would you like to continue?", ButtonType.YES, ButtonType.NO);
 		nextGame.setHeaderText("Choose what to do next.");
@@ -158,6 +173,17 @@ public void gameOver() {
 			public void handle(DialogEvent arg0) {
 				// TODO Auto-generated method stub
 				lostAlert.close();
+				
+				String name;
+				Optional<String> result = highScoreDialog.showAndWait();
+				if (result.isPresent() && !(result.get().equals(""))) {
+					name = result.get();
+				} else if (!result.isPresent()){
+					name = "Player";
+				} else {
+					name = "Player";
+				}
+				saveHighScore(name, getScore());
 				
 				Optional<ButtonType> r = nextGame.showAndWait();
 				
@@ -176,6 +202,34 @@ public void gameOver() {
 		
 		
 	}
+
+	public void saveHighScore(String name, int score) {
+		try {
+			scoreWriter = new FileWriter("scores.txt", true);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			scoreWriter.write(name + " " + score + "\n");
+			scoreWriter.close();  
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
+	public String getHighScores() {
+		String result = "";
+		Scanner s = null;
+		try {
+			s = new Scanner(new File("scores.txt"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		while (s.hasNextLine()) {
+			result += s.nextLine() + "\n";
+		}
+		return result;
+	}
 	
 }
