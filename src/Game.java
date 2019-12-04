@@ -1,15 +1,3 @@
-/**
- * Jake Nickel, Artur Gatin, George Kim, Period 2, Group 9, 5/6/18
- * Time taken: ~3 days
- * Reflection: This first installment of our Game project has been very useful, 
- * as it contained essentials of Git, as well as vital lessons on group
- * collaboration in a shared project. Resolving merge conflicts and coordinating
- * commits is great exposure to the real world of shared development, and learning
- * such skills early will, I'm sure, prove worthwhile. Overall, a great starting point
- * to the world of Bitbucket and Git, and I look forward to further development on this
- * project.
- */
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
